@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--  Bootstrap css  -->
+    <link rel="stylesheet" href="./css/bootstrap.rtl.min.css">
+    <!--  Bootstrap icons  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!--  my custom CSS  -->
+    <link rel="stylesheet" href="./css/main.css">
+
+    <title>Ali-Gh-Dev || todo list with jquery</title>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-10 col-md-8 mx-auto">
+
+            <h4 class="text-center border border-info d-flex justify-content-evenly py-4 mt-3 bg-dark text-light rounded-4">
+                <i class="bi bi-card-checklist fs-1 fw-bold"></i>
+                کارهای پیش رو
+            </h4>
+
+            <!-- form -->
+            <div class="row text-center mt-5">
+                <div class="col-md-6">
+                    <form>
+                        <input type="text" name="task-text" class="form-control form-control-sm" id="task-text"
+                               placeholder="یک مورد اضافه کنید ...">
+                        <div id="input-invalid" class="form-text text-danger"></div>
+                        <button type="submit" class="btn btn-success btn-sm mt-2">افزودن</button>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" id="search" class="form-control form-control-sm mt-5 mt-md-0"
+                           placeholder="جستجو ...">
+                    <div id="not-found" class="form-text text-danger"></div>
+                </div>
+            </div>
+
+            <!-- tasks -->
+            <div class="row g-2 row-cols-1 row-cols-sm-2 row-cols-lg-3 mt-4" id="tasks">
+
+                <!-- task 1 -->
+                <div class="col">
+                    <div class="card text-bg-info">
+                        <div class="card-body">
+                            <p class="card-text">اولین کار در دست اقدام</p>
+                        </div>
+                        <div class="d-flex justify-content-evenly mb-1">
+                            <a class="text-danger fw-bold fs-3 delete-task"><i class="bi bi-x"></i></a>
+                            <a class="text-secondary fw-bold fs-4 edit-task"><i class="bi bi-pencil"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- task 2 -->
+                <div class="col">
+                    <div class="card text-bg-info">
+                        <div class="card-body">
+                            <p class="card-text">دومین کار در دست اقدام</p>
+                        </div>
+                        <div class="d-flex justify-content-evenly mb-1">
+                            <a class="text-danger fw-bold fs-3 delete-task"><i class="bi bi-x"></i></a>
+                            <a class="text-secondary fw-bold fs-4"><i class="bi bi-pencil"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- clear all button -->
+            <button class="btn btn-danger my-3 w-100" id="clear-all">حذف همه</button>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!--  bootstrap js  -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous">
+</script>
+
+<!--  jquery  -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous">
+</script>
+
+<!--  my custom js  -->
+<script src="./script.js"></script>
+
+</body>
+</html>

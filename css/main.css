@@ -1,0 +1,20 @@
+.card {
+    min-height: 9rem;
+    transition: 0.3s all linear;
+}
+.card:hover {
+    background: rgb(33, 37, 41) !important;
+    color: white !important;
+}
+.card-text {
+    font-size: 0.75rem;
+}
+
+.card a {
+    cursor: pointer;
+}
+
+.card.edit-mode {
+    background: rgba(255, 193, 7, 0.4) !important;
+    color: black !important;
+}
