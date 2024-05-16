@@ -1,21 +1,20 @@
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-let form1 = document.querySelector('form');
-let submit_btn = document.querySelector('form button[type="submit"]');
+let tasks_tag = $('#tasks');
+let form1 = $('form');
+let submit_btn = $('form button[type="submit"]');
 let old_task = '';
 
 // Functions
 function refresh_tasks() {
     // hide/show "search field" & "clear all button"
     if (tasks.length === 0) {
-        document.getElementById('search').style.display = 'none';
-        document.getElementById('clear-all').style.display = 'none';
+        $('#search, #clear-all').css('display','none');
     } else {
-        document.getElementById('search').style.display = 'block';
-        document.getElementById('clear-all').style.display = 'block';
+        $('#search, #clear-all').css('display','block');
     }
 
-    let tasks_tag = document.querySelector('#tasks');
-    tasks_tag.innerHTML = "";
+
+    tasks_tag.html("");
     for (let task of tasks) {
         let new_tag = `
                 <div class="col">
@@ -29,7 +28,7 @@ function refresh_tasks() {
                         </div>
                     </div>
                 </div> `;
-        tasks_tag.innerHTML += new_tag;
+        tasks_tag.append(new_tag);
     }
 
 }
@@ -37,31 +36,31 @@ function refresh_tasks() {
 function create_task(ev) {
     ev.preventDefault();
     // let task_text = new FormData(form1).get('task-text').trim();
-    let task_text = document.querySelector('#task-text').value.trim();
+    let task_text = $('#task-text').val().trim();
 
 
     if (task_text.length === 0) {
-        document.querySelector('#input-invalid').textContent = 'کادر خالی است';
+        $('#input-invalid').text('کادر خالی است');
     } else if (tasks.includes(task_text)) {
-        document.querySelector('#input-invalid').textContent = 'متن وارد شده تکراری است';
+        $('#input-invalid').text('متن وارد شده تکراری است');
     } else {
 
-        if (submit_btn.classList.contains('edit-btn')) {
+        if (submit_btn.hasClass('edit-btn')) {
             // edit task
-            document.querySelector('#input-invalid').textContent = '';
+            $('#input-invalid').text("");
             let index = tasks.indexOf(old_task);
             tasks[index] = task_text;
             localStorage.setItem('tasks', JSON.stringify(tasks));
-            document.querySelector('#task-text').value = '';
+            $('#task-text').val("");
             refresh_tasks();
             location.reload();
 
         } else {
             // create new task
-            document.querySelector('#input-invalid').textContent = '';
+            $('#input-invalid').text("");
             tasks.push(task_text);
             localStorage.setItem('tasks', JSON.stringify(tasks));
-            document.querySelector('#task-text').value = '';
+            $('#task-text').val("");
             refresh_tasks();
             location.reload();
         }
@@ -91,29 +90,6 @@ function clear_all() {
     location.reload();
 }
 
-// function filter(ev) {
-//     if (ev.key === 'Enter') {
-//         let searched_txt = ev.target.value;
-//
-//         if (searched_txt.length === 0) {
-//             location.reload();
-//         } else {
-//             let filtered_tasks = [];
-//             for (let task of tasks) {
-//                 if (task.length >= searched_txt.length && task.substring(0, searched_txt.length) === searched_txt) {
-//                     filtered_tasks.push(task);
-//                 }
-//             }
-//             if (filtered_tasks.length === 0) {
-//                 document.getElementById('not-found').innerText = 'موردی یافت نشد !!!';
-//             } else {
-//                 document.getElementById('not-found').innerText = '';
-//                 tasks = filtered_tasks;
-//                 refresh_tasks();
-//             }
-//         }
-//     }
-// }
 
 function filter2(ev) {
     let searched_txt = ev.target.value.toLowerCase();
@@ -167,10 +143,12 @@ function edit_task(ev) {
 
 
 // Events
-document.addEventListener('DOMContentLoaded', refresh_tasks);
-form1.addEventListener('submit', create_task);
-document.querySelector('#tasks').addEventListener('click', delete_task);
-document.getElementById('clear-all').addEventListener('click', clear_all);
-// document.getElementById('search').addEventListener('keydown', filter);
-document.getElementById('search').addEventListener('input', filter2);
-document.querySelector('#tasks').addEventListener('click', edit_task);
+$(document).ready(refresh_tasks);
+form1.submit(create_task);
+tasks_tag.click(function (ev){
+    delete_task(ev);
+    edit_task(ev);
+});
+$('#clear-all').click(clear_all);
+// document.getElementById('search').addEventListener('input', filter2);
+$('#search').change(filter2);
