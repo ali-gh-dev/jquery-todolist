@@ -92,7 +92,7 @@ function clear_all() {
 
 
 function filter2(ev) {
-    let searched_txt = ev.target.value.toLowerCase();
+    let searched_txt = $(ev.target).val().toLowerCase();
 
     if (searched_txt.length === 0) {
         location.reload();
@@ -107,10 +107,10 @@ function filter2(ev) {
         }
 
         if (filtered_tasks.length === 0) {
-            document.getElementById('tasks').innerHTML = "";
-            document.getElementById('not-found').innerText = 'موردی یافت نشد !!!';
+            $('#tasks').html("");
+            $('#not-found').text('موردی یافت نشد !!!');
         } else {
-            document.getElementById('not-found').innerText = '';
+            $('#not-found').text('');
             tasks = filtered_tasks;
             refresh_tasks();
         }
@@ -119,25 +119,24 @@ function filter2(ev) {
 }
 
 function edit_task(ev) {
-    if (ev.target.classList.contains('bi-pencil')) {
+    if ($(ev.target).hasClass('bi-pencil')) {
         let old, task_input, current_card, other_cards;
 
-        old = ev.target.parentElement.parentElement.previousElementSibling.textContent.trim();
+        old = $(ev.target).parents('.card').find('.card-text').text().trim();
 
         old_task = old;
 
-        task_input = document.getElementById('task-text');
-        task_input.value = old;
+        task_input = $('#task-text');
+        task_input.val(old);
         task_input.select();
 
-        other_cards = document.querySelectorAll('#tasks .card');
-        other_cards.forEach(card => card.classList.remove('edit-mode'));
-        current_card = ev.target.parentElement.parentElement.parentElement;
-        current_card.classList.add('edit-mode');
+        other_cards = $('#tasks .card');
+        other_cards.removeClass('edit-mode');
+        current_card = $(ev.target).parents('.card');
+        current_card.addClass('edit-mode');
 
-        submit_btn.innerText = 'ویرایش';
-        submit_btn.classList.replace('btn-success', 'btn-warning');
-        submit_btn.classList.add('edit-btn');
+        submit_btn.text('ویرایش');
+        submit_btn.removeClass('btn-success').addClass('btn-warning edit-btn');
     }
 }
 
