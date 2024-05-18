@@ -70,9 +70,9 @@ function create_task(ev) {
 }
 
 function delete_task(ev) {
-    if (ev.target.classList.contains('bi-x')) {
+    if ($(ev.target).hasClass('bi-x')) {
 
-        let task_text = ev.target.parentElement.parentElement.previousElementSibling.firstElementChild.textContent.trim();
+        let task_text = $(ev.target).parents('.card').find('.card-text').text().trim();
         tasks.splice(tasks.indexOf(task_text), 1);
         localStorage.setItem('tasks', JSON.stringify(tasks));
         refresh_tasks();
@@ -89,7 +89,6 @@ function clear_all() {
     localStorage.removeItem('tasks');
     location.reload();
 }
-
 
 function filter2(ev) {
     let searched_txt = $(ev.target).val().toLowerCase();
@@ -140,7 +139,6 @@ function edit_task(ev) {
     }
 }
 
-
 // Events
 $(document).ready(refresh_tasks);
 form1.submit(create_task);
@@ -149,5 +147,4 @@ tasks_tag.click(function (ev){
     edit_task(ev);
 });
 $('#clear-all').click(clear_all);
-// document.getElementById('search').addEventListener('input', filter2);
-$('#search').change(filter2);
+$('#search').on('input',filter2);
